@@ -13,19 +13,19 @@ class VectorBase:
     def __init__(self):
         self.path = make_or_open_vec_db()
 
-        # Load embedding model
+       
         self.embedding_model_path = self._resolve_embedding_path()
         self.embeddings = HuggingFaceEmbeddings(
             model_name=self.embedding_model_path
         )
 
-        # Text splitter
+        
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=320,
             chunk_overlap=40
         )
 
-        # Load or create FAISS index
+        
         self.index_path = os.path.join(self.path, "faiss_index")
         if os.path.exists(self.index_path):
             logger.info("Loading existing FAISS index...")
@@ -36,7 +36,7 @@ class VectorBase:
             )
         else:
             logger.info("Creating new FAISS index...")
-            self.vectorstore = None  # created after first document
+            self.vectorstore = None 
 
     def _resolve_embedding_path(self):
         base = os.path.join(get_base_path(), "embedding_model")
@@ -92,3 +92,4 @@ class VectorBase:
         )
 
         return results
+
